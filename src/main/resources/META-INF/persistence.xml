@@ -6,6 +6,7 @@
 
 	<persistence-unit name="dev" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>jpa.entities.User</class> <!-- Include User class here -->
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver"
 				value="org.hsqldb.jdbcDriver" />
@@ -42,7 +43,7 @@
 
 	<persistence-unit name="mysql">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
- 
+
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
