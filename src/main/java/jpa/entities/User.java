@@ -2,6 +2,10 @@ package jpa.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Entity
 public class User {
     @Id
@@ -10,6 +14,9 @@ public class User {
     private String username;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<Ticket> tickets = new ArrayList<>();
 
     // Constructeurs, getters et setters
 
@@ -21,8 +28,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
-    @Id
-    @GeneratedValue
+
     public Long getId() {
         return id;
     }
@@ -63,4 +69,13 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public void setTicket(Ticket ticket){
+        this.tickets.add(ticket);
+    }
+
+    public List<Ticket> getDepartment() {
+        return tickets;
+    }
+
 }

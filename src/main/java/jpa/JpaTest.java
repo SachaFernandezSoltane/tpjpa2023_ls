@@ -3,6 +3,8 @@ package jpa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jpa.entities.Tag;
+import jpa.entities.Ticket;
 import jpa.entities.User;
 
 public class JpaTest {
@@ -26,8 +28,14 @@ public class JpaTest {
         tx.begin();
         try {
             User user = new User("john_doe", "john@example.com", "password123");
-            // Persistance de l'utilisateur dans la base de données
-            test.persistUser(user);
+            Tag tag = new Tag("Tag1");
+            Ticket ticket = new Ticket("ticket1","Premier ticket de test","Pending");
+            ticket.setTagList(tag);
+            tag.setTicketList(ticket);
+
+            manager.persist(tag);
+            manager.persist(user);
+            manager.persist(ticket);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,10 +44,4 @@ public class JpaTest {
         EntityManagerHelper.closeEntityManagerFactory();
         System.out.println(".. done");
     }
-
-    public void persistUser(User user) {
-        manager.persist(user);
-    }
-
-
 }
