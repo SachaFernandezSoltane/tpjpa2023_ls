@@ -23,10 +23,11 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(String name, String description, String status) {
+    public Ticket(String name, String description, String status,User user) {
         this.name = name;
         this.description = description;
         this.status = status;
+        this.user = user;
     }
 
     public Long getId() {
