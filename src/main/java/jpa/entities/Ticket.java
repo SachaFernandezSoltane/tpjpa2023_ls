@@ -12,7 +12,9 @@ public class Ticket {
     private Long id;
     private String name;
     private String description;
-    private String status;
+
+    @ManyToOne
+    private Status status;
 
     @ManyToOne
     private User user;
@@ -23,7 +25,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(String name, String description, String status,User user) {
+    public Ticket(String name, String description, Status status,User user) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -54,12 +56,12 @@ public class Ticket {
         this.description = email;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String password) {
-        this.status = password;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

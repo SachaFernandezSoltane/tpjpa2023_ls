@@ -2,9 +2,11 @@ package jpa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jpa.DAO.StatusDAO;
 import jpa.DAO.TagDAO;
 import jpa.DAO.TicketDAO;
 import jpa.DAO.UserDAO;
+import jpa.entities.Status;
 import jpa.entities.Tag;
 import jpa.entities.Ticket;
 import jpa.entities.User;
@@ -22,6 +24,7 @@ public class JpaTest {
         UserDAO userDAO = new UserDAO();
         TagDAO tagDAO = new TagDAO();
         TicketDAO ticketDAO = new TicketDAO();
+        StatusDAO statusDAO = new StatusDAO();
 
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
@@ -37,8 +40,11 @@ public class JpaTest {
             User user = new User("john_doe", "john@example.com", "password123");
             userDAO.save(user);
 
+            Status status = new Status();
+            statusDAO.save(status);
+
             // Créer et sauvegarder un ticket associé à l'utilisateur
-            Ticket ticket = new Ticket("ticket1", "Premier ticket de test", "Pending", user);
+            Ticket ticket = new Ticket("ticket1", "Premier ticket de test", status,user);
             ticketDAO.save(ticket);
 
             // Créer un tag
